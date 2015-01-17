@@ -36,7 +36,7 @@
         if (actualLeftCount === parseInt(caloriesLeftMsg)) {
             return;
         }
-        caloriesLeftMsg    += ' <span style="color:' + color + ' !important; font-size:80% !important;">(' + actualLeftCount + ')</span>';
+        caloriesLeftMsg    += ' <span style="color:' + color + ' !important; font-size:50% !important;">(' + actualLeftCount + ')</span>';
         caloriesLeftDiv.first().html(caloriesLeftMsg);
     }
 
