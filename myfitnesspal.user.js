@@ -1,14 +1,46 @@
 // ==UserScript==
 // @name        MyFitnessPal Tweaks
 // @namespace   userscripts.org
-// @include     http://www.myfitnesspal.com/food/diary/*
-// @include     https://www.myfitnesspal.com/food/diary/*
+// @include     http://www.myfitnesspal.com/*
+// @include     https://www.myfitnesspal.com/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js
 // @version     1.0
 // ==/UserScript==
 
 ;(function($, window, document, undefined) {
     $(document).ready(function() {
+        updateDashboard();
+        updateFoodDiary();
+    });
+
+    function updateDashboard() {
+        var goalSpan        = $('#summary-info .calorie-math .equation .value.goal .num');
+        if (goalSpan.length === 0) {
+            return;
+        }
+        var goalCount       = parseInt(goalSpan.first().html());
+
+        var foodSpan        = $('#summary-info .calorie-math .equation .value + .value .num');
+        var foodCount       = parseInt(foodSpan.first().html());
+
+        var color;
+        var actualLeftCount = goalCount - foodCount;
+        if (actualLeftCount < 0) {
+            color = '#f00';
+        } else {
+            color = '#197910';
+        }
+        var caloriesLeftDiv = $('#calories-remaining-number');
+        var caloriesLeftMsg = caloriesLeftDiv.first().html();
+
+        if (actualLeftCount === parseInt(caloriesLeftMsg)) {
+            return;
+        }
+        caloriesLeftMsg    += ' <span style="color:' + color + ' !important; font-size:80% !important;">(' + actualLeftCount + ')</span>';
+        caloriesLeftDiv.first().html(caloriesLeftMsg);
+    }
+
+    function updateFoodDiary() {
         var calorieMsgTd    = $('#main .food_container table tfoot tr:last-child td.extra');
         if (calorieMsgTd.length === 0) {
             console.log('no message');
@@ -41,5 +73,5 @@
         }
         dailyLeftMsg   += '<br><span style="color:' + color + ' !important; font-size:80% !important;">(' + actualLeftCount + ')</span>';
         dailyLeftTd.first().html(dailyLeftMsg);
-    });
+    }
 })(jQuery, window, document);
