@@ -6,6 +6,7 @@
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js
 // @version     1.0.1
 // @downloadURL https://raw.githubusercontent.com/chimericdream/GreaseMonkey-MyFitnessPal-Tweaks/master/myfitnesspal.user.js
+// @updateURL   https://raw.githubusercontent.com/chimericdream/GreaseMonkey-MyFitnessPal-Tweaks/master/myfitnesspal.user.js
 // ==/UserScript==
 
 ;(function($, window, document, undefined) {
